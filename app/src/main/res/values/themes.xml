@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Ryuu" parent="Theme.MaterialComponents.NoActionBar">
+
+        <item name="android:statusBarColor" tools:targetApi="l">@color/mainBackground</item>
+        <!-- Customize your theme here. -->
+        <item name="android:background">#1A1A1A</item>
+        <item name="android:windowAnimationStyle">@style/animation</item>
+    </style>
+</resources>
