@@ -19,9 +19,10 @@ class SearchViewModel(private val repository: Repository): ViewModel() {
         Year:Int? = null,
         Season:Int? = null,
         Genres:String? = null,
+        Page:Int? = null,
     ){
         viewModelScope.launch {
-            val response = repository.getSearchAnime(Title,Formats,Status,Year,Season,Genres)
+            val response = repository.getSearchAnime(Title,Formats,Status,Year,Season,Genres,Page)
             searchResult.value = response
         }
     }

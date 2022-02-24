@@ -1,12 +1,13 @@
 package com.joellui.ryuu
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -23,6 +24,11 @@ class SearchFragment : Fragment(),SearchResultAdapter.OnClickListener {
 
     var search_result = mutableListOf<AnimeDetails>()
     private lateinit var viewModel: SearchViewModel
+    var isScrolling: Boolean = false
+    var currentItems: Int = 0
+    var totalItems: Int = 0
+    var scrolledOutItems: Int = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,16 +64,39 @@ class SearchFragment : Fragment(),SearchResultAdapter.OnClickListener {
                 val searchResultAdapter = SearchResultAdapter(result.body()?.data?.documents!!,this@SearchFragment)
                 if (search_result.isEmpty()){
                     search_result.addAll(result.body()?.data?.documents!!)
+                    val totalPage:Int? = result.body()?.data?.last_page
                     searchResult.adapter = searchResultAdapter
                     searchResult.layoutManager = GridLayoutManager(activity,3)
+
+
                 }else{
                     search_result.clear()
                     search_result.addAll(result.body()?.data?.documents!!)
                     searchResult.adapter = searchResultAdapter
-                    searchResult.layoutManager = GridLayoutManager(activity,3)
+                    searchResult.layoutManager = GridLayoutManager(activity, 3)
                 }
-            }else{
+            } else {
                 Toast.makeText(context, result.message(), Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+        searchResult.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (dy > 0) { // only when scrolling up
+                    val visibleThreshold = 2
+                    val layoutManager = searchResult.layoutManager as GridLayoutManager
+                    val lastItem = layoutManager.findLastCompletelyVisibleItemPosition()
+                    val currentTotalCount = layoutManager.itemCount
+                    if (currentTotalCount <= lastItem + visibleThreshold) {
+                        //show your loading view 
+                        // load content in background
+//                            TODO: infinite Scroll
+                        Toast.makeText(context, "Your reached the END", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
 
         })
