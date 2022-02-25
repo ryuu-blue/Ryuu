@@ -43,10 +43,11 @@
             <ImageView
                 android:id="@+id/iv_bannerImage"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:contentDescription="Banner for the anime"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/ic_launcher_background" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,7 +64,7 @@
             android:id="@+id/tv_Title"
             android:text="Anime Title"
             android:textAlignment="textEnd"
-            android:textSize="35sp"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="@+id/fl_bannerStage"
             app:layout_constraintEnd_toEndOf="@+id/fl_bannerStage"
             app:layout_constraintHorizontal_bias="1.0"
@@ -139,6 +140,76 @@
             app:layout_constraintTop_toTopOf="@id/title_year"
             app:layout_constraintBottom_toBottomOf="@id/title_year"
             app:layout_constraintStart_toEndOf="@id/title_year"/>
+
+        <com.sanojpunchihewa.glowbutton.GlowButton
+            android:id="@+id/btn_trailer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            app:cornerRadius="5dp"
+            android:text="Trailer"
+            app:buttonColor="#e4a15d"
+            app:glowColor="#e4a15d"
+            app:layout_constraintTop_toBottomOf="@id/tv_year"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <soup.neumorphism.NeumorphCardView
+            style="@style/Widget.Neumorph.CardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_trailer"
+            app:neumorph_shadowColorDark="@color/solid_dark_color"
+            app:neumorph_shadowColorLight="@color/solid_light_color">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description: "
+                    android:layout_margin="10dp"
+                    android:textSize="18sp"/>
+
+                <com.ms.square.android.expandabletextview.ExpandableTextView
+                    android:id="@+id/etv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:maxCollapsedLines="3"
+                    app:animDuration="200">
+
+                    <TextView
+                        android:id="@id/expandable_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:justificationMode="inter_word"
+                        android:layout_margin="10dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/white" />
+
+                    <ImageButton
+                        android:id="@id/expand_collapse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:layout_gravity="end|bottom"
+                        android:background="@android:color/transparent"/>
+
+                </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+            </LinearLayout>
+
+        </soup.neumorphism.NeumorphCardView>
 
 
 

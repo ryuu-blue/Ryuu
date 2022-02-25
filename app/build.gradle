@@ -63,4 +63,10 @@ dependencies {
 
 //    coil for loading images from the internet
     implementation "io.coil-kt:coil:1.4.0"
+
+//    extendable textView
+    implementation "com.ms-square:expandableTextView:0.1.4"
+
+//    neo glow button
+    implementation "com.github.SanojPunchihewa:GlowButton:1.0.1"
 }
